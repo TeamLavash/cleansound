@@ -23,8 +23,6 @@ QmlConnector::~QmlConnector()
 void QmlConnector::cppSlot(const QString &msg)
 {
     qDebug() << "Called the C++ slot with message:" << msg;
-//    QQmlComponent component(engine, "qrc:/main.qml");
-//    QObject *object = component.create();
 
     double value = QQmlProperty::read(rootItem, "progress").toDouble();
     if (value < 1.0) {
