@@ -4,7 +4,11 @@ QT += core qml quick widgets
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    qmlconnector.cpp
+    qmlconnector.cpp \
+    mockaudiofile.cpp \
+    mockvideofile.cpp \
+    mockvideogetter.cpp \
+    mockaudioseparator.cpp
 
 RESOURCES += qml.qrc
 
@@ -17,4 +21,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    qmlconnector.hpp
+    qmlconnector.hpp \
+    audiofile.hpp \
+    videogetter.hpp \
+    videofile.hpp \
+    audioseparator.hpp \
+    mockaudiofile.hpp \
+    mockvideofile.hpp \
+    mockvideogetter.hpp \
+    mockaudioseparator.hpp

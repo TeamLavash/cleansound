@@ -1,6 +1,10 @@
 #include <QGuiApplication>
 #include "qmlconnector.hpp"
 
+#include <audiofile.hpp>
+#include <audioseparator.hpp>
+#include <videofile.hpp>
+#include <videogetter.hpp>
 
 int main(int argc, char *argv[])
 {
