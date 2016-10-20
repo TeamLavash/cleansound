@@ -134,6 +134,7 @@ Rectangle {
             y: 0
             width: 112
             height: 38
+            property bool ongoing: false
             hoverEnabled: true
         }
         border.width: 1
@@ -144,6 +145,41 @@ Rectangle {
         anchors.fill: parent
         z: 0
         source: "res/soundwaves.jpg"
+
+        ProgressBar {
+            id: progressBar1
+            x: 80
+            y: 374
+            value: window.progress
+            indeterminate: false
+            visible: mouseArea3.ongoing
+        }
+
+        Label {
+            id: label1
+            x: 43
+            y: 258
+            width: 111
+            height: 38
+            color: "#ff0000"
+            text: window.file1Name
+            wrapMode: Text.WrapAnywhere
+            visible: window.file1Chosen
+        }
+
+        Label {
+            id: label2
+            x: 205
+            y: 258
+            width: 111
+            height: 38
+            color: "#ff0000"
+            text: window.file2Name
+            font.pointSize: 9
+            topPadding: 1
+            wrapMode: Text.WrapAnywhere
+            visible: window.file2Chosen
+        }
     }
 
     Rectangle {
@@ -192,5 +228,10 @@ Rectangle {
         }
         z: 1
         visible: true
+    }
+
+    Connections {
+        target: mouseArea3
+        onClicked: mouseArea3.ongoing=true
     }
 }

@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += core qml quick
+QT += core qml quick widgets
 CONFIG += c++11
 
 SOURCES += main.cpp \

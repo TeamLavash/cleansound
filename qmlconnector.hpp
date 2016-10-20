@@ -6,17 +6,15 @@ class QmlConnector : public QObject
 {
     Q_OBJECT
 public:
-    QmlConnector() : QObject()
-    {
-    }
-
-    virtual ~QmlConnector() {}
+    QmlConnector();
+    virtual ~QmlConnector();
 
 public slots:
     void cppSlot(const QString &msg);
 
 private:
-
+    class QQmlApplicationEngine *engine;
+    QObject *rootItem;
 signals:
     void addFileButtonClicked(int num);
     void startButtonClicked();
