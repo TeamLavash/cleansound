@@ -28,7 +28,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     qmlconnector.hpp \
-
     audiofile.hpp \
     videogetter.hpp \
     videofile.hpp \
