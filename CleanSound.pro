@@ -8,7 +8,13 @@ SOURCES += main.cpp \
     mockaudiofile.cpp \
     mockvideofile.cpp \
     mockvideogetter.cpp \
-    mockaudioseparator.cpp
+    mockaudioseparator.cpp \
+    wavaudiofile.cpp
+
+RESOURCES += qml.qrc
+
+# Additional import path used to resolve QML modules in Qt Creator's code model
+QML_IMPORT_PATH =
 
 RESOURCES += qml.qrc
 
@@ -22,6 +28,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     qmlconnector.hpp \
+
     audiofile.hpp \
     videogetter.hpp \
     videofile.hpp \
@@ -29,4 +36,5 @@ HEADERS += \
     mockaudiofile.hpp \
     mockvideofile.hpp \
     mockvideogetter.hpp \
-    mockaudioseparator.hpp
+    mockaudioseparator.hpp \
+    wavaudiofile.hpp
