@@ -180,6 +180,18 @@ Rectangle {
             wrapMode: Text.WrapAnywhere
             visible: window.file2Chosen
         }
+
+        Text {
+            id: text1
+            x: 225
+            y: 374
+            width: 128
+            height: 18
+            text: window.version
+            verticalAlignment: Text.AlignBottom
+            horizontalAlignment: Text.AlignRight
+            font.pixelSize: 10
+        }
     }
 
     Rectangle {

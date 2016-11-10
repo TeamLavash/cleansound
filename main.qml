@@ -16,6 +16,7 @@ Window {
     property bool file1Chosen: false
     property string file2Name: ""
     property bool file2Chosen: false
+    property string version: "UNKNOWN VERSION"
 
     signal qmlSignal(string buttonClicked)
 

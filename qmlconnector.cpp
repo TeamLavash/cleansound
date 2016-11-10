@@ -3,6 +3,7 @@
 #include <QQmlProperty>
 #include <QDebug>
 #include <QFileDialog>
+#include <QString>
 #include "qmlconnector.hpp"
 
 QmlConnector::QmlConnector() : QObject(0)
@@ -13,6 +14,7 @@ QmlConnector::QmlConnector() : QObject(0)
     QObject::connect(rootItem, SIGNAL(qmlSignal(QString)),
                      this, SLOT(cppSlot(QString)));
 
+    QQmlProperty::write(rootItem, "version", QString(GIT_VERSION));
 }
 
 QmlConnector::~QmlConnector()
