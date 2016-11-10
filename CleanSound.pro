@@ -9,8 +9,7 @@ SOURCES += main.cpp \
     mockvideofile.cpp \
     mockvideogetter.cpp \
     mockaudioseparator.cpp \
-    wavaudiofile.cpp \
-    version.cpp 
+    wavaudiofile.cpp
 
 RESOURCES += qml.qrc
 
