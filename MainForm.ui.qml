@@ -187,6 +187,7 @@ Rectangle {
             y: 374
             width: 128
             height: 18
+            color: "#3c3535"
             text: window.version
             verticalAlignment: Text.AlignBottom
             horizontalAlignment: Text.AlignRight

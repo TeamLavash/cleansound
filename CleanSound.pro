@@ -16,11 +16,6 @@ RESOURCES += qml.qrc
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
-RESOURCES += qml.qrc
-
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
 GIT_VERSION = $$system(git describe --always)
 
 DEFINES += GIT_VERSION=\\\"$$GIT_VERSION\\\"
