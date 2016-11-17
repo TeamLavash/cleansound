@@ -8,13 +8,13 @@
 #include <cstdint>
 #include <QSharedPointer>
 #include <cstring>
+#include "audiofile.hpp"
 
 typedef uint32_t sample_t;
 
 // Структура, описывающая заголовок WAV файла.
 
-
-class WavAudioFile
+class WavAudioFile : public AudioFile
 {
     struct WAVHEADER
     {
