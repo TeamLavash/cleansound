@@ -81,9 +81,10 @@ class WavAudioFile : public AudioFile
     };
     WAVHEADER wavHeader;
     QVector<sample_t> samples;
+    QString file;
 public:
-    WavAudioFile(const QString &);
-    void getDiscreteSamples(QVector<sample_t>  &);
+    WavAudioFile(const QString &path);
+    void getDiscreteSamples(QVector<sample_t> &);
 };
 
 #endif // WAVAUDIOFILE_H

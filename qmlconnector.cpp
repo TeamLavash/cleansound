@@ -6,6 +6,9 @@
 #include <QString>
 #include "qmlconnector.hpp"
 
+#include <QSound>
+#include "localvideofile.hpp"
+
 QmlConnector::QmlConnector() : QObject(0)
 {
     engine = new QQmlApplicationEngine;
@@ -26,9 +29,11 @@ void QmlConnector::cppSlot(const QString &msg)
 {
     qDebug() << "Called the C++ slot with message:" << msg;
 
-    double value = QQmlProperty::read(rootItem, "progress").toDouble();
-    if (value < 1.0) {
-        value += 0.05;
-        QQmlProperty::write(rootItem, "progress", value);
+    if (msg == "3") {
+        double value = QQmlProperty::read(rootItem, "progress").toDouble();
+        if (value < 1.0) {
+            value += 0.05;
+            QQmlProperty::write(rootItem, "progress", value);
+        }
     }
 }

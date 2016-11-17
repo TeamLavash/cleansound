@@ -11,7 +11,11 @@ public:
 
     virtual QSharedPointer<AudioFile> convertToAudio() override;
     void loadVideo();
-    void loadAudio();
+
+    const QString &getAudioPath()
+    {
+        return audioPath;
+    }
 
 private:
 

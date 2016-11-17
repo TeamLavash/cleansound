@@ -3,5 +3,8 @@
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
         <file>res/soundwaves.jpg</file>
+        <file>ComboBox1.qml</file>
+        <file>LocalContainer.qml</file>
+        <file>YoutubeContainer.qml</file>
     </qresource>
 </RCC>

@@ -1,6 +1,6 @@
 #include "wavaudiofile.hpp"
 
-WavAudioFile::WavAudioFile(const QString &file)
+WavAudioFile::WavAudioFile(const QString &path) : file(path)
 {
     QFile inFile(file);
     if (!inFile.open(QIODevice::ReadOnly)) return;

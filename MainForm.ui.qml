@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.0
+import Qt.labs.calendar 1.0
 
 Rectangle {
     id: rectangle1
@@ -38,59 +39,6 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         font.family: "Times New Roman"
         font.pixelSize: 46
-    }
-
-    Rectangle {
-        id: buttonVideo2
-        x: 207
-        y: 214
-        width: 112
-        height: 38
-        radius: 5
-        opacity: mouseArea2.containsMouse ? 0.95 : 0.8
-        scale: mouseArea2.containsMouse ? 1.02 : 1
-        z: 1
-        visible: true
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#0066ff"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#001433"
-            }
-
-
-            GradientStop {
-                position: 1
-                color: "#001433"
-            }
-        }
-        Text {
-            id: textButton2
-            x: 8
-            y: 8
-            width: 96
-            height: 22
-            text: qsTr("ADD 2")
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 18
-            font.bold: true
-        }
-
-        MouseArea {
-            id: mouseArea2
-            x: 0
-            y: 0
-            width: 112
-            height: 38
-            hoverEnabled: true
-            visible: true
-        }
-        border.width: 1
     }
 
     Rectangle {
@@ -155,32 +103,6 @@ Rectangle {
             visible: mouseArea3.ongoing
         }
 
-        Label {
-            id: label1
-            x: 43
-            y: 258
-            width: 111
-            height: 38
-            color: "#ff0000"
-            text: window.file1Name
-            wrapMode: Text.WrapAnywhere
-            visible: window.file1Chosen
-        }
-
-        Label {
-            id: label2
-            x: 205
-            y: 258
-            width: 111
-            height: 38
-            color: "#ff0000"
-            text: window.file2Name
-            font.pointSize: 9
-            topPadding: 1
-            wrapMode: Text.WrapAnywhere
-            visible: window.file2Chosen
-        }
-
         Text {
             id: text1
             x: 225
@@ -193,58 +115,253 @@ Rectangle {
             horizontalAlignment: Text.AlignRight
             font.pixelSize: 10
         }
+
+        ComboBox1 {
+            id: comboBox1
+            x: 125
+            y: 180
+        }
     }
 
-    Rectangle {
-        id: buttonVideo1
-        x: 44
-        y: 214
-        width: 112
-        height: 38
-        radius: 5
-        opacity: mouseArea1.containsMouse ? 0.95 : 0.8
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#0066ff"
-            }
+    LocalContainer {
+        id: localContainer
+        x: 18
+        y: 205
+        width: 319
+        height: 109
+        visible: comboBox1.currentText == "Local"
 
-            GradientStop {
-                position: 1
-                color: "#001433"
-            }
-        }
-        border.color: "#000000"
-        scale: mouseArea1.containsMouse ? 1.02 : 1.0
-        smooth: true
-        Text {
-            id: textButton1
-            x: 8
-            y: 8
-            width: 96
-            height: 22
-            text: qsTr("ADD 1")
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 18
-            font.bold: true
-        }
-
-        MouseArea {
-            id: mouseArea1
-            x: 0
-            y: 0
+        Rectangle {
+            id: buttonVideo1
+            x: 19
+            y: 15
             width: 112
             height: 38
-            hoverEnabled: true
+            radius: 5
+            opacity: mouseArea1.containsMouse ? 0.95 : 0.8
+            gradient: Gradient {
+                GradientStop {
+                    position: 0
+                    color: "#0066ff"
+                }
+
+                GradientStop {
+                    position: 1
+                    color: "#001433"
+                }
+            }
+            border.color: "#000000"
+            scale: mouseArea1.containsMouse ? 1.02 : 1.0
+            smooth: true
+            Text {
+                id: textButton1
+                x: 8
+                y: 8
+                width: 96
+                height: 22
+                text: qsTr("ADD 1")
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: 18
+                font.bold: true
+            }
+
+            MouseArea {
+                id: mouseArea1
+                x: 0
+                y: 0
+                width: 112
+                height: 38
+                hoverEnabled: true
+                visible: true
+            }
+            z: 1
             visible: true
         }
-        z: 1
-        visible: true
+
+        Rectangle {
+            id: buttonVideo2
+            x: 182
+            y: 15
+            width: 112
+            height: 38
+            radius: 5
+            opacity: mouseArea2.containsMouse ? 0.95 : 0.8
+            scale: mouseArea2.containsMouse ? 1.02 : 1
+            z: 1
+            visible: true
+            gradient: Gradient {
+                GradientStop {
+                    position: 0
+                    color: "#0066ff"
+                }
+
+                GradientStop {
+                    position: 1
+                    color: "#001433"
+                }
+
+
+                GradientStop {
+                    position: 1
+                    color: "#001433"
+                }
+            }
+            Text {
+                id: textButton2
+                x: 8
+                y: 8
+                width: 96
+                height: 22
+                text: qsTr("ADD 2")
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: 18
+                font.bold: true
+            }
+
+            MouseArea {
+                id: mouseArea2
+                x: 0
+                y: 0
+                width: 112
+                height: 38
+                hoverEnabled: true
+                visible: true
+            }
+            border.width: 1
+        }
+
+        Label {
+            id: label1
+            x: 19
+            y: 59
+            width: 111
+            height: 38
+            color: "#ff0000"
+            text: window.file1Name
+            wrapMode: Text.WrapAnywhere
+            visible: window.file1Chosen
+        }
+
+        Label {
+            id: label2
+            x: 180
+            y: 59
+            width: 111
+            height: 38
+            color: "#ff0000"
+            text: window.file2Name
+            font.pointSize: 9
+            topPadding: 1
+            wrapMode: Text.WrapAnywhere
+            visible: window.file2Chosen
+        }
+    }
+
+    YoutubeContainer {
+        id: youtubeContainer
+        x: 18
+        y: 206
+        visible: comboBox1.currentText == "YouTube"
+
+        TextField {
+            id: youtubePath1
+            x: 113
+            y: 14
+            color: "#cdd2ff"
+            text: qsTr("Text Field")
+            font.bold: true
+            font.pointSize: 12
+            z: 1
+        }
+
+        TextField {
+            id: youtubePath2
+            x: 113
+            y: 60
+            color: "#cdd2ff"
+            text: qsTr("Text Field")
+            font.bold: true
+            font.pointSize: 12
+            z: 1
+        }
+
+        Label {
+            id: label3
+            x: 15
+            y: 14
+            width: 86
+            height: 40
+            color: "#71737f"
+            text: qsTr("File 1")
+            z: 1
+            font.pointSize: 24
+            textFormat: Text.RichText
+        }
+
+        Label {
+            id: label4
+            x: 15
+            y: 60
+            width: 86
+            height: 39
+            color: "#71737f"
+            text: qsTr("File 2")
+            z: 1
+            font.pointSize: 24
+        }
+
+        Rectangle {
+            id: rectangle2
+            x: 15
+            y: 14
+            width: 86
+            height: 40
+            color: "#001433"
+            radius: 5
+            opacity: 0.8
+        }
+
+        Rectangle {
+            id: rectangle3
+            x: 15
+            y: 60
+            width: 86
+            height: 39
+            color: "#001433"
+            radius: 5
+            opacity: 0.8
+        }
+
+        Rectangle {
+            id: rectangle4
+            x: 113
+            y: 14
+            width: 200
+            height: 40
+            color: "#001433"
+            radius: 5
+            opacity: 0.8
+        }
+
+        Rectangle {
+            id: rectangle5
+            x: 113
+            y: 60
+            width: 200
+            height: 40
+            color: "#001433"
+            radius: 5
+            opacity: 0.7
+        }
     }
 
     Connections {
         target: mouseArea3
         onClicked: mouseArea3.ongoing=true
     }
+
+
+
 }
