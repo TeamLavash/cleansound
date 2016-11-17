@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     mockvideogetter.cpp \
     mockaudioseparator.cpp \
     wavaudiofile.cpp \
-    localvideofile.cpp
+    localvideofile.cpp \
+    youtubevideofile.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,4 +38,5 @@ HEADERS += \
     mockvideogetter.hpp \
     mockaudioseparator.hpp \
     wavaudiofile.hpp \
-    localvideofile.hpp
+    localvideofile.hpp \
+    youtubevideofile.hpp
