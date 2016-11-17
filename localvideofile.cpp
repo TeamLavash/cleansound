@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <ctime>
 #include <exception>
 #include "localvideofile.hpp"
 #include "wavaudiofile.hpp"
