@@ -11,8 +11,13 @@ class YoutubeVideoFile : public VideoFile
     QString file_path;
 public:
     YoutubeVideoFile(QString);
-    QSharedPointer<AudioFile> convertToAudio();
-    void loadVideo();
+    QSharedPointer<AudioFile> convertToAudio() override;
+    void loadVideo() override;
+    virtual const QString &getAudioPath() override
+    {
+        return file_path;
+    }
+
 };
 
 #endif // YOUTUBEVIDEOFILE_H

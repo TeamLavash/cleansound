@@ -13,3 +13,7 @@ QSharedPointer<AudioFile> MockVideoFile::convertToAudio()
 {
     return QSharedPointer<AudioFile>(new MockAudioFile);
 }
+
+void MockVideoFile::loadVideo()
+{
+}

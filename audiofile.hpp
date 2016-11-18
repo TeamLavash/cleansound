@@ -2,6 +2,7 @@
 #define AUDIOFILE_HPP
 
 #include <QVector>
+#include <QString>
 #include <cstdint>
 
 typedef uint32_t sample_t;

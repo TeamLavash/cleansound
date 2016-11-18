@@ -10,9 +10,9 @@ public:
     LocalVideoFile(const QString &path);
 
     virtual QSharedPointer<AudioFile> convertToAudio() override;
-    void loadVideo();
+    virtual void loadVideo() override;
 
-    const QString &getAudioPath()
+    virtual const QString &getAudioPath() override
     {
         return audioPath;
     }

@@ -11,6 +11,8 @@ public:
     }
 
     virtual QSharedPointer<AudioFile> convertToAudio() = 0;
+    virtual void loadVideo() = 0;
+    virtual const QString &getAudioPath() = 0;
 };
 
 #endif // VIDEOFILE_HPP

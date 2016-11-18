@@ -7,6 +7,11 @@ Rectangle {
 
     width: 360
     height: 400
+    property alias youtubePath2: youtubePath2
+    property alias youtubePath1: youtubePath1
+    property alias comboBox1: comboBox1
+    property alias mouseAreaPlay2: mouseAreaPlay2
+    property alias mouseAreaPlay1: mouseAreaPlay1
     property alias mouseArea1: mouseArea1
     property alias mouseArea3: mouseArea3
     property alias mouseArea2: mouseArea2
@@ -239,7 +244,7 @@ Rectangle {
             width: 111
             height: 38
             color: "#ff0000"
-            text: window.file1Name
+            text: window.localPath1
             wrapMode: Text.WrapAnywhere
             visible: window.file1Chosen
         }
@@ -251,7 +256,7 @@ Rectangle {
             width: 111
             height: 38
             color: "#ff0000"
-            text: window.file2Name
+            text: window.localPath2
             font.pointSize: 9
             topPadding: 1
             wrapMode: Text.WrapAnywhere
@@ -360,6 +365,98 @@ Rectangle {
     Connections {
         target: mouseArea3
         onClicked: mouseArea3.ongoing=true
+    }
+
+    Rectangle {
+        id: buttonPlay1
+        x: 36
+        y: 320
+        width: 71
+        height: 38
+        radius: 5
+        visible: window.finished
+        z: 1
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#0066ff"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#001433"
+            }
+        }
+        Text {
+            id: textPlay1
+            x: 8
+            y: 8
+            width: 55
+            height: 22
+            text: qsTr("▻")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 18
+            font.bold: true
+        }
+
+        MouseArea {
+            id: mouseAreaPlay1
+            x: 0
+            y: 0
+            width: 71
+            height: 38
+            hoverEnabled: true
+        }
+        scale: mouseAreaPlay1.containsMouse ? 1.02 : 1.0
+        border.width: 1
+        opacity: mouseAreaPlay1.containsMouse ? 0.95 : 0.8
+    }
+
+    Rectangle {
+        id: buttonPlay2
+        x: 248
+        y: 320
+        width: 71
+        height: 38
+        radius: 5
+        visible: window.finished
+        z: 1
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#0066ff"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#001433"
+            }
+        }
+        Text {
+            id: textPlay2
+            x: 8
+            y: 8
+            width: 55
+            height: 22
+            text: qsTr("▻")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.bold: true
+            font.pixelSize: 18
+        }
+
+        MouseArea {
+            id: mouseAreaPlay2
+            x: 0
+            y: 0
+            width: 71
+            height: 38
+            hoverEnabled: true
+        }
+        scale: mouseAreaPlay2.containsMouse ? 1.02 : 1.0
+        border.width: 1
+        opacity: mouseAreaPlay2.containsMouse ? 0.95 : 0.8
     }
 
 
