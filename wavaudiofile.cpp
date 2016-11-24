@@ -5,44 +5,25 @@
 using namespace std;
 WavAudioFile::WavAudioFile(const QString &path) : file(path)
 {
-    /*
-    QFile inFile(file);
-    if (!inFile.open(QIODevice::ReadOnly)) return;
-    inFile.read(reinterpret_cast<char *>(&wavHeader),sizeof(wavHeader));
-    QByteArray audioBlock = inFile.readAll();
-    sample_t audioArrayLength = audioBlock.length() / 4;
-    QSharedPointer <sample_t> audioArray (new sample_t[audioArrayLength]);
-    for (unsigned int i = 0;i < audioArrayLength; i++) {
-        sample_t temp;
-        char &currentBlock = audioBlock.data()[i*4];
-        memcpy(&temp, &currentBlock, sizeof(temp));
-        samples.push_back(temp);
-    }
-    inFile.close();
-    */
-    ifstream cbf(path.toStdString().c_str(), ios::binary | ios::in );
-    cbf.seekg(0,ios::end);
-    long filelength=cbf.tellg();
-    cbf.close();
     FILE* wavFile = fopen(path.toStdString().c_str(), "rb");
-    int headerSize = sizeof(wav_hdr);
-    size_t bytesRead = fread(&wavHeader, 1, headerSize, wavFile);
+    size_t bytesRead = fread(&wavHeader, 1, sizeof(wav_hdr), wavFile);
     if (bytesRead > 0){
-     //   uint16_t bytesPerSample = wavHeader.bitsPerSample / 8;      //Number     of bytes per sample
-     //   uint64_t numSamples = wavHeader.ChunkSize / bytesPerSample; //How many samples are in the wav file?
-        static const uint16_t BUFFER_SIZE = 4096;
-        int32_t* buffer = new int32_t[BUFFER_SIZE];
-        while ((bytesRead = fread(buffer, sizeof buffer[0], BUFFER_SIZE / (sizeof buffer[0]), wavFile)) > 0)
+        for(unsigned int i = 0;i<wavHeader.ChunkSize;i += sizeof(sample_t))
                {
-                    sample_t temp = *(buffer);
-                    samples.push_back(temp);
-                    cout << "Read " << bytesRead << " bytes." << endl;
+            if((i>24)) {
+                uint16_t temp;
+                fread(&temp,sizeof(temp),1,wavFile);
+                //sample_t temp4 = (temp << 16) | temp;
+                samples.push_back(temp);
+                fread(&temp,sizeof(temp),1,wavFile);
+            }
+            else {
+                sample_t temp;
+                fread(&temp,sizeof(temp),1,wavFile);
+                samples.push_back(temp);
+            }
                }
-        delete [] buffer;
-
-                buffer = nullptr;
-
-
+               /*
                 cout << "File is                    :" << filelength << " bytes." << endl;
                 cout << "RIFF header                :" << wavHeader.RIFF[0] << wavHeader.RIFF[1] << wavHeader.RIFF[2] << wavHeader.RIFF[3] << endl;
                 cout << "WAVE header                :" << wavHeader.WAVE[0] << wavHeader.WAVE[1] << wavHeader.WAVE[2] << wavHeader.WAVE[3] << endl;
@@ -58,6 +39,7 @@ WavAudioFile::WavAudioFile(const QString &path) : file(path)
                 // Audio format 1=PCM,6=mulaw,7=alaw, 257=IBM Mu-Law, 258=IBM A-Law, 259=ADPCM
                 cout << "Block align                :" << wavHeader.blockAlign << endl;
                 cout << "Data string                :" << wavHeader.Subchunk2ID[0] << wavHeader.Subchunk2ID[1] << wavHeader.Subchunk2ID[2] << wavHeader.Subchunk2ID[3] << endl;
+                */
 }
 }
 
@@ -68,13 +50,11 @@ void WavAudioFile::getDiscreteSamples(QVector<sample_t> & s)
 
 void WavAudioFile::saveToFile(QString filePath)
 {
-    QFile outFile(filePath);
-    outFile.open(QIODevice::WriteOnly);
+    FILE* wavFile = fopen(filePath.toStdString().c_str(), "wb");
     int headerSize = sizeof(wav_hdr);
-    outFile.write((char*)&wavHeader,headerSize);
-    for(auto it = samples.begin();it!=samples.end();it++) {
-        outFile.write((char *)(*it),sizeof(sample_t));
+    fwrite(&wavHeader, 1, headerSize, wavFile);
+    for(auto it = samples.begin();it != samples.end();it++) {
+        fwrite(it,sizeof(sample_t),1,wavFile);
     }
-    outFile.close();
 }
 
