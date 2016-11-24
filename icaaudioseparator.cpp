@@ -3,6 +3,18 @@
 #include "wavaudiofile.hpp"
 #include "mockaudiofile.hpp"
 
+const char *ICAAudioSeparator::ICA_SCRIPT =
+        "import numpy as np"
+        "from sklearn.decomposition import FastICA"
+        "s1 = np.fromfile(\"~temp_a.bin\", dtype=np.int32, sep=' ')"
+        "s2 = np.fromfile(\"~temp_b.bin\", dtype=np.int32, sep=' ')"
+        "S = np.c_[s1, s2]"
+        "ica = FastICA(n_components=2)"
+        "S_ = ica.fit_transform(S)"
+        "res = np.transpose(S_)"
+        "res[0].tofile(\"~temp_res_a.bin\", sep=' ')"
+        "res[1].tofile(\"~temp_res_b.bin\", sep=' ')";
+
 ICAAudioSeparator::ICAAudioSeparator(AudioPtr a, AudioPtr b) : fileA(a), fileB(b)
 {
 
@@ -28,6 +40,11 @@ auto ICAAudioSeparator::separate(AudioPtr, AudioPtr) -> QPair<AudioPtr, AudioPtr
 {
     createSamplesFile(fileA, "A");
     createSamplesFile(fileB, "B");
+    std::ofstream out("~temp_scr.py");
+    out << ICA_SCRIPT;
+    out.close();
+    system("python ~temp_scr.py");
+
 
     return qMakePair(AudioPtr(new MockAudioFile), AudioPtr(new MockAudioFile));
 }
