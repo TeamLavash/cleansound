@@ -81,7 +81,9 @@ void WavAudioFile::saveToFile(QString filePath)
     }
     fwrite(&data_size,sizeof(sample_t),1,wavFile);
     for(auto it = samples.begin();it != samples.end();it++) {
-        fwrite(it,sizeof(sample_t),1,wavFile);
+        sample_t temp = *it;
+        temp = (temp << 16) | temp;
+        fwrite(&temp,sizeof(sample_t),1,wavFile);
     }
 }
 
