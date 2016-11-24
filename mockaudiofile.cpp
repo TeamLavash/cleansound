@@ -19,3 +19,8 @@ void MockAudioFile::setDiscreteSamples(const QVector<sample_t>&)
 {
     // Do nothing
 }
+
+void MockAudioFile::saveToFile(const QString &)
+{
+    // Do nothing
+}

@@ -58,5 +58,7 @@ auto ICAAudioSeparator::separate(AudioPtr, AudioPtr) -> QPair<AudioPtr, AudioPtr
     system("python ~temp_scr.py");
     readSamplesFile(fileA, "A");
     readSamplesFile(fileB, "B");
+    fileA->saveToFile("resA.wav");
+    fileB->saveToFile("resB.wav");
     return qMakePair(AudioPtr(new MockAudioFile), AudioPtr(new MockAudioFile));
 }

@@ -72,7 +72,7 @@ void WavAudioFile::setDiscreteSamples(const QVector<sample_t> & s)
     samples = s;
 }
 
-void WavAudioFile::saveToFile(QString filePath)
+void WavAudioFile::saveToFile(const QString &filePath)
 {
     FILE* wavFile = fopen(filePath.toStdString().c_str(), "wb");
     for(auto it = header.begin();it != header.end();it++) {

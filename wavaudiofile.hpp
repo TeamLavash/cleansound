@@ -25,7 +25,7 @@ public:
     WavAudioFile(const QString &path);
     void getDiscreteSamples(QVector<sample_t>&) override;
     void setDiscreteSamples(const QVector<sample_t>&) override;
-    void saveToFile(QString filePath);
+    void saveToFile(const QString &filePath) override;
 };
 
 #endif // WAVAUDIOFILE_H
