@@ -36,6 +36,18 @@ void ICAAudioSeparator::createSamplesFile(AudioPtr file, const std::string &iden
     out.close();
 }
 
+void ICAAudioSeparator::readSamplesFile(AudioPtr file, const std::string &identifier)
+{
+    std::ifstream in("~temp_res_" + identifier + ".bin", std::ios::binary);
+    sample_t sample;
+    QVector<sample_t> samples;
+    while (!in.eof()) {
+        in >> sample;
+        samples.push_back(sample);
+    }
+    file->setDiscreteSamples(samples);
+}
+
 auto ICAAudioSeparator::separate(AudioPtr, AudioPtr) -> QPair<AudioPtr, AudioPtr>
 {
     createSamplesFile(fileA, "A");
@@ -44,7 +56,7 @@ auto ICAAudioSeparator::separate(AudioPtr, AudioPtr) -> QPair<AudioPtr, AudioPtr
     out << ICA_SCRIPT;
     out.close();
     system("python ~temp_scr.py");
-
-
+    readSamplesFile(fileA, "A");
+    readSamplesFile(fileB, "B");
     return qMakePair(AudioPtr(new MockAudioFile), AudioPtr(new MockAudioFile));
 }

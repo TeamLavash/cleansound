@@ -67,7 +67,7 @@ void WavAudioFile::getDiscreteSamples(QVector<sample_t> & s)
     s = samples;
 }
 
-void WavAudioFile::setDiscreteSamples(QVector<sample_t> & s)
+void WavAudioFile::setDiscreteSamples(const QVector<sample_t> & s)
 {
     samples = s;
 }

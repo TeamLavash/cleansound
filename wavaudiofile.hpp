@@ -23,8 +23,8 @@ class WavAudioFile : public AudioFile
     QString file;
 public:
     WavAudioFile(const QString &path);
-    void getDiscreteSamples(QVector<sample_t>&);
-    void setDiscreteSamples(QVector<sample_t>&);
+    void getDiscreteSamples(QVector<sample_t>&) override;
+    void setDiscreteSamples(const QVector<sample_t>&) override;
     void saveToFile(QString filePath);
 };
 

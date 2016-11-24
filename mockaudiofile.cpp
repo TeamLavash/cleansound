@@ -14,3 +14,8 @@ void MockAudioFile::getDiscreteSamples(QVector<sample_t> &samples)
     samples.resize(DEFAULT_SAMPLES);
     samples.fill(FILL_VALUE);
 }
+
+void MockAudioFile::setDiscreteSamples(const QVector<sample_t>&)
+{
+    // Do nothing
+}

@@ -14,6 +14,7 @@ public:
     }
 
     virtual void getDiscreteSamples(QVector<sample_t> &samples) = 0;
+    virtual void setDiscreteSamples(const QVector<sample_t>&) = 0;
 };
 
 #endif // AUDIOFILE_HPP

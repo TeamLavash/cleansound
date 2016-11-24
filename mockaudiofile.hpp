@@ -9,6 +9,7 @@ public:
     MockAudioFile();
     virtual ~MockAudioFile();
     void getDiscreteSamples(QVector<sample_t> &samples) override;
+    void setDiscreteSamples(const QVector<sample_t>&) override;
 private:
     enum {
         DEFAULT_SAMPLES = 256,
