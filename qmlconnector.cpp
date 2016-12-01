@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QString>
 #include "qmlconnector.hpp"
+#include "icaaudioseparator.hpp"
 
 #include <QSound>
 #include "localvideofile.hpp"
@@ -57,33 +58,37 @@ void QmlConnector::getAudio(const QString &channel)
     }
 }
 
-void QmlConnector::cppSlot(const QString &msg)
+bool QmlConnector::handleLocalLoad(const QString &command)
 {
-    // TODOS:
-    // 1 - remove code duplication
-    // 2 - change slot messages
-    // 3 - check if file is valid
-    // 4 - refactor
-    if (msg == "ch1") {
-        QString videoName = QQmlProperty::read(rootItem, "localPath1").toString();
-        LocalVideoFile videoFile(videoName);
-        videoFile.loadVideo();
-        audio1 = videoFile.getAudioPath();
-    } else if (msg == "ch2"){
-        QString videoName = QQmlProperty::read(rootItem, "localPath2").toString();
-        LocalVideoFile videoFile(videoName);
-        videoFile.loadVideo();
-        audio2 = videoFile.getAudioPath();
-    } else if (msg == "start") {
-        double value = QQmlProperty::read(rootItem, "progress").toDouble();
-        if (value < 1.0) {
-            value += 0.6;
-            QQmlProperty::write(rootItem, "progress", value);
-        } else {
-            bool finished = true;
-            QQmlProperty::write(rootItem, "finished", finished);
-        }
-    } else if (msg == "pl1") {
+    bool res = false;
+    if (command == "ch1") {
+        video1 = QQmlProperty::read(rootItem, "localPath1").toString();
+        res = true;
+    } else if (command == "ch2"){
+        video2 = QQmlProperty::read(rootItem, "localPath2").toString();
+        res = true;
+    }
+    return res;
+}
+
+bool QmlConnector::handleYouTubeLoad(const QString &command)
+{
+    bool res = false;
+    if (command == "ch1") {
+        video1 = QQmlProperty::read(rootItem, "youtubePath1").toString();
+        res = true;
+    } else if (command == "ch2"){
+        video2 = QQmlProperty::read(rootItem, "youtubePath2").toString();
+        res = true;
+    }
+    return res;
+
+}
+
+bool QmlConnector::handlePlay(const QString &command)
+{
+    bool res = true;
+    if (command == "pl1") {
         // Play 1 file
         if (sound1 != nullptr) {
             sound1->stop();
@@ -93,7 +98,8 @@ void QmlConnector::cppSlot(const QString &msg)
         sound1 = new QSound(audio1);
         if (sound1 != nullptr)
             sound1->play();
-    } else if (msg == "pl2") {
+        res = true;
+    } else if (command == "pl2") {
         // Play 2 file
         if (sound2 != nullptr) {
             sound2->stop();
@@ -103,13 +109,67 @@ void QmlConnector::cppSlot(const QString &msg)
         sound2 = new QSound(audio2);
         if (sound2 != nullptr)
             sound2->play();
-    } else if (msg == "pl1") {
-        // Stop 1 file
-        if (sound1 != nullptr)
-            sound1->stop();
-    } else if (msg == "pl2") {
-        // Stop 2 file
-        if (sound2 != nullptr)
-            sound2->stop();
+        res = true;
+    }
+
+    return res;
+}
+
+bool QmlConnector::handleStart(const QString &command)
+{
+    if (command != "start")
+        return false;
+
+    QString source = QQmlProperty::read(rootItem, "sourceType").toString();
+
+    if (source == "Local") {
+        handleLocalLoad("ch1");
+        handleLocalLoad("ch2");
+        LocalVideoFile videoFile1(video1);
+        videoFile1.loadVideo();
+        audio1 = videoFile1.getAudioPath();
+        LocalVideoFile videoFile2(video2);
+        videoFile2.loadVideo();
+        audio2 = videoFile2.getAudioPath();
+    } else if (source == "YouTube") {
+        handleYouTubeLoad("ch1");
+        handleYouTubeLoad("ch2");
+        YoutubeVideoFile videoFile1(video1);
+        videoFile1.loadVideo();
+        audio1 = videoFile1.getAudioPath();
+        YoutubeVideoFile videoFile2(video2);
+        videoFile2.loadVideo();
+        audio2 = videoFile2.getAudioPath();
+    } else {
+        // Exceptional case
+    }
+
+    AudioSeparator::AudioPtr a = AudioSeparator::AudioPtr(new WavAudioFile("1.wav"));
+    AudioSeparator::AudioPtr b = AudioSeparator::AudioPtr(new WavAudioFile("2.wav"));
+    ICAAudioSeparator sep(a, b);
+    sep.separate(a, b);
+    // TODO write to files and set paths to them
+    return true;
+//        double value = QQmlProperty::read(rootItem, "progress").toDouble();
+//        if (value < 1.0) {
+//            value += 0.6;
+//            QQmlProperty::write(rootItem, "progress", value);
+//        } else {
+//            bool finished = true;
+//            QQmlProperty::write(rootItem, "finished", finished);
+//        }
+}
+
+void QmlConnector::cppSlot(const QString &msg)
+{
+    // TODOS:
+    // 1 - remove code duplication
+    // 2 - change slot messages
+    // 3 - check if file is valid
+    // 4 - refactor
+    bool res = handleStart(msg)
+            || handlePlay(msg);
+    if (!res) {
+        // TODO do what?
     }
 }

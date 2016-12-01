@@ -19,8 +19,8 @@ Window {
     property string version: "UNKNOWN VERSION"
     property bool finished: false
     property string sourceType: "Local"
-    property string youtubeFile1: ""
-    property string youtubeFile2: ""
+    property string youtubePath1: ""
+    property string youtubePath2: ""
 
     signal qmlSignal(string buttonClicked)
 
@@ -49,13 +49,14 @@ Window {
 
     MainForm {
         youtubePath1.onDisplayTextChanged: {
-            window.youtubeFile1 = youtubePath1.text
+            window.youtubePath1 = youtubePath1.text
         }
         youtubePath2.onDisplayTextChanged: {
-            window.youtubeFile2 = youtubePath2.text
+            window.youtubePath2 = youtubePath2.text
         }
+
         comboBox1.onDisplayTextChanged: {
-            window.sourceType = comboBox1.currentText
+            window.sourceType = comboBox1.displayText
         }
 
         mouseAreaPlay1.onClicked: {
