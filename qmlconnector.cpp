@@ -148,16 +148,12 @@ bool QmlConnector::handleStart(const QString &command)
     AudioSeparator::AudioPtr b = AudioSeparator::AudioPtr(new WavAudioFile("2.wav"));
     ICAAudioSeparator sep(a, b);
     sep.separate(a, b);
+    audio1.prepend("res_");
+    audio2.prepend("res_");
+    a->saveToFile(audio1);
+    b->saveToFile(audio2);
     // TODO write to files and set paths to them
     return true;
-//        double value = QQmlProperty::read(rootItem, "progress").toDouble();
-//        if (value < 1.0) {
-//            value += 0.6;
-//            QQmlProperty::write(rootItem, "progress", value);
-//        } else {
-//            bool finished = true;
-//            QQmlProperty::write(rootItem, "finished", finished);
-//        }
 }
 
 void QmlConnector::cppSlot(const QString &msg)

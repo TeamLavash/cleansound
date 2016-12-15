@@ -10,7 +10,6 @@
 #include <cstring>
 #include "audiofile.hpp"
 
-typedef uint32_t sample_t;
 typedef uint8_t header_t;
 
 // Структура, описывающая заголовок WAV файла.

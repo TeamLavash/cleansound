@@ -5,7 +5,7 @@
 #include <QString>
 #include <cstdint>
 
-typedef uint32_t sample_t;
+typedef int32_t sample_t;
 
 class AudioFile {
 public:
