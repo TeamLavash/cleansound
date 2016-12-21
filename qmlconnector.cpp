@@ -41,7 +41,6 @@ void QmlConnector::setAudio2(const QString &path)
 
 void QmlConnector::getAudio(const QString &channel)
 {
-//sourceType
     QString source = QQmlProperty::read(rootItem, "sourceType").toString();
     QString &audio = channel == "1" ? audio1 : audio2;
     if (source == "YouTube") {
