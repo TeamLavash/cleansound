@@ -99,15 +99,6 @@ Rectangle {
         z: 0
         source: "res/soundwaves.jpg"
 
-        ProgressBar {
-            id: progressBar1
-            x: 80
-            y: 374
-            value: window.progress
-            indeterminate: false
-            visible: mouseArea3.ongoing
-        }
-
         Text {
             id: text1
             x: 225
@@ -125,6 +116,21 @@ Rectangle {
             id: comboBox1
             x: 125
             y: 180
+        }
+
+        Label {
+            id: label5
+            x: 132
+            y: 364
+            width: 87
+            height: 20
+            color: "#ff0000"
+            text: qsTr("COMPLETED!")
+            visible: window.finished
+            topPadding: -1
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: 11
         }
     }
 
@@ -374,7 +380,7 @@ Rectangle {
         width: 71
         height: 38
         radius: 5
-        visible: window.finished
+        visible: false
         z: 1
         gradient: Gradient {
             GradientStop {
@@ -419,8 +425,9 @@ Rectangle {
         y: 320
         width: 71
         height: 38
+        color: "#0066ff"
         radius: 5
-        visible: window.finished
+        visible: false
         z: 1
         gradient: Gradient {
             GradientStop {

@@ -6,7 +6,6 @@
 
 LocalVideoFile::LocalVideoFile(const QString &path) : videoPath(path)
 {
-    srand(time(0));
 }
 
 void LocalVideoFile::loadVideo()

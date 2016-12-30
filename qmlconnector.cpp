@@ -143,14 +143,13 @@ bool QmlConnector::handleStart(const QString &command)
         // Exceptional case
     }
 
-    AudioSeparator::AudioPtr a = AudioSeparator::AudioPtr(new WavAudioFile("1.wav"));
-    AudioSeparator::AudioPtr b = AudioSeparator::AudioPtr(new WavAudioFile("2.wav"));
+    AudioSeparator::AudioPtr a = AudioSeparator::AudioPtr(new WavAudioFile(audio1));
+    AudioSeparator::AudioPtr b = AudioSeparator::AudioPtr(new WavAudioFile(audio2));
     ICAAudioSeparator sep(a, b);
     sep.separate(a, b);
-    audio1.prepend("res_");
-    audio2.prepend("res_");
-    a->saveToFile(audio1);
-    b->saveToFile(audio2);
+    audio1 = "resA.wav";
+    audio2 = "resB.wav";
+    QQmlProperty::write(rootItem, "finished", true);
     // TODO write to files and set paths to them
     return true;
 }

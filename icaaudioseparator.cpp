@@ -11,7 +11,7 @@ const char *ICAAudioSeparator::ICA_SCRIPT =
         "S = np.c_[s1, s2]\n"
         "ica = FastICA(n_components=2)\n"
         "S_ = ica.fit_transform(S) \n"
-        "S_ = S_ / S_.std(axis=0)\n"
+        "S_ /= S_.std(axis=0)\n"
         "res = np.transpose(S_)\n"
         "res[0].tofile(\"~temp_res_A.bin\", sep=' ')\n"
         "res[1].tofile(\"~temp_res_B.bin\", sep=' ')\n";
@@ -46,8 +46,8 @@ void ICAAudioSeparator::readSamplesFile(AudioPtr file, const std::string &identi
     file->getDiscreteSamples(samples);
     while (!in.eof()) {
         in >> sample;
-        int newval = static_cast<unsigned int>(samples[i] * abs(sample));
-        samples[i++] = newval > 65535 ? 65535 : newval;
+        sample_t newval = static_cast<sample_t>(abs(samples[i] * sample));
+        samples[i++] = newval > 65535 ? 0 : newval;
     }
     file->setDiscreteSamples(samples);
 }
