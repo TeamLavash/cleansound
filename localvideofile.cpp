@@ -14,7 +14,7 @@ void LocalVideoFile::loadVideo()
     unsigned int randNumb = rand();
     tempAudioName += QString::number(randNumb);
     tempAudioName += ".wav";
-    QString command = "ffmpeg -i " + videoPath + " -y " + tempAudioName;
+    QString command = "ffmpeg -i " + videoPath.remove(0,8) + " -y " + tempAudioName;
     int ret = system(command.toStdString().c_str());
     if (ret != 0)
         throw std::exception(); // FIXME

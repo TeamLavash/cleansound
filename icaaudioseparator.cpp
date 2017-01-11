@@ -59,7 +59,7 @@ auto ICAAudioSeparator::separate(AudioPtr, AudioPtr) -> QPair<AudioPtr, AudioPtr
     std::ofstream out("~temp_scr.py");
     out << ICA_SCRIPT;
     out.close();
-    system("python3 ~temp_scr.py");
+    system("python ~temp_scr.py");
     readSamplesFile(fileA, "A");
     readSamplesFile(fileB, "B");
     fileA->saveToFile("resA.wav");
