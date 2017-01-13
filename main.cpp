@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ctime>
 #include <QGuiApplication>
 #include "qmlconnector.hpp"
 #include "wavaudiofile.hpp"
@@ -8,6 +10,8 @@
 
 int main(int argc, char *argv[])
 {
+    srand(time(0));
+
     QGuiApplication app(argc, argv);
 
     QmlConnector connector;

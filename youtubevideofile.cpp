@@ -25,6 +25,10 @@ void YoutubeVideoFile::loadVideo()
     std::string temp = "youtube-dl " + video_url.toStdString() + " --audio-format \"wav\" --extract-audio --id";
     std::system(temp.c_str());
     file_path = "~tmp_" + token + ".wav";
-    temp = "rename "  + token.toStdString() + ".wav " + file_path.toStdString();
+#ifdef __linux__
+    temp = "mv "  + token.toStdString() + ".wav " + file_path.toStdString();
+#elif _WIN32
+    temp = "ren "  + token.toStdString() + ".wav " + file_path.toStdString();
+#endif
     std::system(temp.c_str());
 }
