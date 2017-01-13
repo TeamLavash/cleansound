@@ -124,6 +124,15 @@ bool QmlConnector::handleStart(const QString &command)
     if (source == "Local") {
         handleLocalLoad("ch1");
         handleLocalLoad("ch2");
+
+        // Removing file://
+#ifdef __linux__
+        video1 = video1.remove(0, 7);
+        video2 = video2.remove(0, 7);
+#elif _WIN32
+        video1 = video1.remove(0, 8);
+        video2 = video2.remove(0, 8);
+#endif
         LocalVideoFile videoFile1(video1);
         videoFile1.loadVideo();
         audio1 = videoFile1.getAudioPath();
@@ -145,10 +154,12 @@ bool QmlConnector::handleStart(const QString &command)
 
     AudioSeparator::AudioPtr a = AudioSeparator::AudioPtr(new WavAudioFile(audio1));
     AudioSeparator::AudioPtr b = AudioSeparator::AudioPtr(new WavAudioFile(audio2));
-    ICAAudioSeparator sep(a, b);
-    sep.separate(a, b);
+    ICAAudioSeparator sep;
+    auto res = sep.separate(a, b);
     audio1 = "resA.wav";
     audio2 = "resB.wav";
+    res.first->saveToFile(audio1);
+    res.second->saveToFile(audio2);
     QQmlProperty::write(rootItem, "finished", true);
     // TODO write to files and set paths to them
     return true;

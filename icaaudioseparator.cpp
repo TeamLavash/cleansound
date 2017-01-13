@@ -16,7 +16,7 @@ const char *ICAAudioSeparator::ICA_SCRIPT =
         "res[0].tofile(\"~temp_res_A.bin\", sep=' ')\n"
         "res[1].tofile(\"~temp_res_B.bin\", sep=' ')\n";
 
-ICAAudioSeparator::ICAAudioSeparator(AudioPtr a, AudioPtr b) : fileA(a), fileB(b)
+ICAAudioSeparator::ICAAudioSeparator()
 {
 
 }
@@ -52,7 +52,7 @@ void ICAAudioSeparator::readSamplesFile(AudioPtr file, const std::string &identi
     file->setDiscreteSamples(samples);
 }
 
-auto ICAAudioSeparator::separate(AudioPtr, AudioPtr) -> QPair<AudioPtr, AudioPtr>
+auto ICAAudioSeparator::separate(AudioPtr fileA, AudioPtr fileB) -> QPair<AudioPtr, AudioPtr>
 {
     createSamplesFile(fileA, "A");
     createSamplesFile(fileB, "B");
@@ -66,7 +66,5 @@ auto ICAAudioSeparator::separate(AudioPtr, AudioPtr) -> QPair<AudioPtr, AudioPtr
 #endif
     readSamplesFile(fileA, "A");
     readSamplesFile(fileB, "B");
-    fileA->saveToFile("resA.wav");
-    fileB->saveToFile("resB.wav");
-    return qMakePair(AudioPtr(new MockAudioFile), AudioPtr(new MockAudioFile));
+    return qMakePair(fileA, fileB);
 }

@@ -11,7 +11,6 @@ public:
     void getDiscreteSamples(QVector<sample_t> &samples) override;
     void setDiscreteSamples(const QVector<sample_t>&) override;
     void saveToFile(const QString &filePath) override;
-private:
     enum {
         DEFAULT_SAMPLES = 256,
         FILL_VALUE = 42
