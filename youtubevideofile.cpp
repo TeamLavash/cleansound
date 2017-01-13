@@ -1,3 +1,4 @@
+#include <string>
 #include "youtubevideofile.hpp"
 
 YoutubeVideoFile::YoutubeVideoFile(QString url)

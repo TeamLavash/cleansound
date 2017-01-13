@@ -1,6 +1,6 @@
-#include "wavaudiofile.hpp"
 #include <iostream>
 #include <fstream>
+#include "wavaudiofile.hpp"
 
 using namespace std;
 
