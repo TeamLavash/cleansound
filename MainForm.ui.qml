@@ -281,7 +281,8 @@ Rectangle {
             x: 113
             y: 14
             color: "#cdd2ff"
-            text: qsTr("Text Field")
+            text: qsTr("")
+            placeholderText: qsTr("Path1")
             font.bold: true
             font.pointSize: 12
             z: 1
@@ -292,7 +293,8 @@ Rectangle {
             x: 113
             y: 60
             color: "#cdd2ff"
-            text: qsTr("Text Field")
+            text: qsTr("")
+            placeholderText: qsTr("Path2")
             font.bold: true
             font.pointSize: 12
             z: 1
