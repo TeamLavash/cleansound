@@ -12,7 +12,8 @@ SOURCES += main.cpp \
     wavaudiofile.cpp \
     localvideofile.cpp \
     youtubevideofile.cpp \
-    icaaudioseparator.cpp
+    icaaudioseparator.cpp \
+    UnitTests.cpp
 
 RESOURCES += qml.qrc
 
@@ -41,4 +42,5 @@ HEADERS += \
     wavaudiofile.hpp \
     localvideofile.hpp \
     youtubevideofile.hpp \
-    icaaudioseparator.hpp
+    icaaudioseparator.hpp \
+    UnitTests.hpp
